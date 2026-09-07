@@ -1,0 +1,226 @@
+.tableContainer {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  width: 100%;
+}
+
+.tableContainer:hover {
+  box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+  transform: translateY(-2px);
+}
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+}
+
+.tableHead {
+  background: rgba(99, 102, 241, 0.04);
+  position: relative;
+}
+
+.tableHead::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.2), transparent);
+}
+
+.tableHead th {
+  padding: 1.25rem 1.5rem;
+  text-align: left;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.tableHead th:last-child {
+  text-align: right;
+  padding-right: 1.75rem;
+}
+
+.tableRow {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--bg-surface);
+  position: relative;
+}
+
+.tableRow td {
+  border-bottom: 1px solid var(--border-color);
+  text-align: left;
+}
+
+.tableRow td:last-child {
+  text-align: right;
+  padding-right: 1.75rem;
+}
+
+.tableRow:last-child td {
+  border-bottom: none;
+}
+
+.tableRow:hover {
+  background-color: var(--bg-elevated);
+}
+
+.tableRow:hover td {
+  color: var(--brand-primary);
+}
+
+.tableCell {
+  padding: 1.25rem 1.5rem;
+  vertical-align: middle;
+  color: var(--text-primary);
+  transition: color 0.2s ease;
+  text-align: left;
+}
+
+.tableCell:last-child {
+  text-align: right;
+  padding-right: 1.75rem;
+}
+
+.tableCellSecondary {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  padding: 1.25rem 1.5rem;
+  vertical-align: middle;
+  text-align: left;
+}
+
+.emptyState {
+  padding: 5rem 2rem;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  background: var(--bg-surface);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.badgeActive {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: var(--success-color);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.badgeInactive {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--error-color);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.badgeRole {
+  background-color: rgba(59, 130, 246, 0.1);
+  color: var(--blueAccent);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+/* Action Buttons within Table */
+.actionGroup {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.primaryActionBtn {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.primaryActionBtn:hover {
+  background: var(--brand-primary);
+  color: white;
+  border-color: var(--brand-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(var(--brand-primary-rgb), 0.25);
+}
+
+.dangerActionBtn {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid transparent;
+  padding: 0.5rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dangerActionBtn:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--error-color);
+  border-color: rgba(239, 68, 68, 0.2);
+  transform: scale(1.05);
+}
+
+@media (max-width: 1024px) {
+  .tableContainer {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 12px;
+  }
+  
+  .table {
+    min-width: 700px;
+    font-size: 0.85rem;
+  }
+  
+  .tableHead th {
+    padding: 1rem;
+    font-size: 0.75rem;
+  }
+  
+  .tableCell, .tableCellSecondary {
+    padding: 1rem;
+  }
+  
+  .actionGroup {
+    gap: 0.5rem;
+  }
+  
+  .primaryActionBtn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
+  }
+}

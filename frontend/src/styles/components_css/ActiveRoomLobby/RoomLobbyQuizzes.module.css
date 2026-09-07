@@ -1,0 +1,179 @@
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.sectionHeader h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.addQuizBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: var(--brand-primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.addQuizBtn:hover {
+  opacity: 0.9;
+}
+
+.quizGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.quizCard {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.quizHeaderRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.quizInfo h3 {
+  margin: 0 0 4px 0;
+  font-size: 1.25rem;
+}
+
+.quizMeta {
+  display: flex;
+  gap: 16px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.quizMeta span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.quizStatusBadge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.quizStatusBadge.waiting { background: rgba(234, 179, 8, 0.1); color: var(--orangeAccent); }
+.quizStatusBadge.active { background: rgba(16, 185, 129, 0.1); color: var(--success-color); }
+.quizStatusBadge.ended { background: rgba(107, 114, 128, 0.1); color: var(--text-gray); }
+
+.timerControl {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-elevated);
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.timerControl select {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  outline: none;
+  cursor: pointer;
+}
+
+.quizActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+}
+
+.primaryActionBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.primaryActionBtn.start {
+  background: var(--success-color);
+  color: white;
+}
+.primaryActionBtn.stop {
+  background: var(--error-color);
+  color: white;
+}
+.primaryActionBtn.results {
+  background: var(--brand-primary);
+  color: white;
+}
+
+.primaryActionBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.secondaryActionBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.secondaryActionBtn:hover {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 24px;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.emptyState h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 16px 0 8px 0;
+}
+
+.emptyState p {
+  font-size: 0.95rem;
+  max-width: 400px;
+  margin: 0;
+}

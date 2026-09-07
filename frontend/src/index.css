@@ -1,0 +1,159 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+/* GLOBAL THEME VARIABLES */
+:root {
+  /* =========================================
+     LIGHT MODE (Default)
+     ========================================= */
+  --bg-main: #f8fafc; /* Soft slate off-white for reduced eye strain */
+  --bg-surface: #ffffff; /* Pure white for cards and modals */
+  --bg-elevated: #f1f5f9; /* Slightly darker for input fields/hovers */
+
+  --text-primary: #0f172a; /* Very dark slate for high WCAG contrast */
+  --text-secondary: #475569; /* Muted slate for descriptions */
+  --text-white: #ffffff;
+  --text-black: #000000;
+  --text-gray: #64748b;
+  --text-light-gray: #94a3b8;
+
+  --brand-primary: #6366f1; /* Indigo: Trust, focus, technology */
+  --brand-primary-hover: #4f46e5;
+  --brand-primary-rgb: 99, 102, 241;
+
+  --brand-accent: #f43f5e; /* Rose/Coral: Exciting accent for gamification & scores */
+  --brand-accent-hover: #e11d48;
+
+  --border-color: #e2e8f0;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+
+  --blueAccent: #3b82f6;
+  --purpleAccent: #8b5cf6;
+  --orangeAccent: #f97316;
+  
+  --success-color: #10b981;
+  --error-color: #ef4444;
+}
+
+/* =========================================
+   DARK MODE (Manual & Auto-detect)
+   ========================================= */
+:root[data-theme="dark"] {
+  --bg-main: #0f172a; /* Deep dark slate */
+  --bg-surface: #1e293b; /* Slightly lighter slate for cards */
+  --bg-elevated: #334155; /* For input fields/hovers */
+
+  --text-primary: #f8fafc; /* Crisp white text */
+  --text-secondary: #94a3b8; /* Soft gray for descriptions */
+  --text-white: #ffffff;
+  --text-black: #000000;
+  --text-gray: #64748b;
+  --text-light-gray: #94a3b8;
+
+  --brand-primary: #818cf8; /* Lighter Indigo to pop on dark backgrounds */
+  --brand-primary-hover: #6366f1;
+  --brand-primary-rgb: 129, 140, 248;
+
+  --brand-accent: #fb7185; /* Lighter Rose/Coral */
+  --brand-accent-hover: #f43f5e;
+
+  --border-color: #334155;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+
+  --blueAccent: #3b82f6;
+  --purpleAccent: #8b5cf6;
+  --orangeAccent: #f97316;
+  
+  --success-color: #34d399;
+  --error-color: #f87171;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg-main: #0f172a;
+    --bg-surface: #1e293b;
+    --bg-elevated: #334155;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-white: #ffffff;
+    --text-black: #000000;
+    --text-gray: #64748b;
+    --text-light-gray: #94a3b8;
+    --brand-primary: #818cf8;
+    --brand-primary-hover: #6366f1;
+    --brand-primary-rgb: 129, 140, 248;
+    --brand-accent: #fb7185;
+    --brand-accent-hover: #f43f5e;
+    --border-color: #334155;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+    --blueAccent: #3b82f6;
+    --purpleAccent: #8b5cf6;
+    --orangeAccent: #f97316;
+    --success-color: #34d399;
+    --error-color: #f87171;
+  }
+}
+
+/* Apply base theme automatically */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: "Inter", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* =========================================
+   GLOBAL DROPDOWN (SELECT) STYLING
+   ========================================= */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: var(--bg-main);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.75rem 2.75rem 0.75rem 1rem;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: var(--shadow-sm);
+}
+
+select:hover {
+  border-color: var(--brand-primary);
+  background-color: var(--bg-surface);
+}
+
+select:focus {
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 3px rgba(var(--brand-primary-rgb), 0.25);
+  background-color: var(--bg-surface);
+}
+
+select option {
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  padding: 0.75rem 1rem;
+  font-weight: 500;
+}

@@ -1,0 +1,23 @@
+
+.welcomeBanner {
+  text-align: left;
+  background: linear-gradient(135deg, rgba(var(--brand-primary-rgb), 0.12), rgba(var(--brand-primary-rgb), 0.02));
+  padding: 2rem 2.5rem;
+  border-radius: 20px;
+  border: 1px solid rgba(var(--brand-primary-rgb), 0.2);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+}
+
+.welcomeBanner h2 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem 0;
+}
+
+.welcomeBanner p {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  margin: 0;
+  line-height: 1.5;
+}

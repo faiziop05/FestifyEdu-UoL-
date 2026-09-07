@@ -1,0 +1,110 @@
+
+.historySection {
+  background: var(--bg-surface);
+  border-radius: 20px;
+  padding: 1.75rem 2rem;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+}
+
+.historyHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
+}
+
+.historyIcon {
+  color: var(--brand-primary);
+}
+
+.historyHeader h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.historyList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.historyItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-color);
+  transition: all 0.2s;
+}
+
+.historyItem:hover {
+  background: rgba(var(--brand-primary-rgb), 0.04);
+  border-color: rgba(var(--brand-primary-rgb), 0.2);
+}
+
+.historyItemLeft {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.historyMeta {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.historyItemRight {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.scorePill {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--success-color);
+  padding: 0.25rem 0.75rem;
+  border-radius: 99px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.pendingPill {
+  background: rgba(245, 158, 11, 0.12);
+  color: var(--orangeAccent);
+  padding: 0.25rem 0.75rem;
+  border-radius: 99px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.historyActionBtn {
+  background: transparent;
+  color: var(--brand-primary);
+  border: 1px solid rgba(var(--brand-primary-rgb), 0.3);
+  padding: 0.4rem 0.875rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.825rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.historyActionBtn:hover:not(:disabled) {
+  background: var(--brand-primary);
+  color: white;
+}
+
+.historyActionBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  border-color: var(--border-color);
+  color: var(--text-secondary);
+}

@@ -1,0 +1,729 @@
+.pageWrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  background-color: var(--bg-body);
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+  overflow: hidden;
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  margin: 10px 10px 10px 0;
+  box-shadow: var(--shadow-sm);
+  z-index: 10;
+  width: calc(100% - 10px);
+  box-sizing: border-box;
+}
+.topBarActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.topBarLeft {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.backBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: color 0.2s;
+  padding: 0.5rem;
+  border-radius: 8px;
+}
+
+.backBtn:hover {
+  color: var(--brand-primary);
+  background: var(--bg-elevated);
+}
+
+.toggleSidebarBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-body);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.toggleSidebarBtn:hover {
+  background: rgba(var(--brand-primary-rgb), 0.1);
+  color: var(--brand-primary);
+  border-color: var(--brand-primary);
+  transform: scale(1.05);
+}
+
+.topBarTitle h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.publishBtnTop {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(
+    135deg,
+    var(--brand-primary-hover) 0%,
+    var(--brand-primary) 100%
+  );
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s;
+}
+
+.publishBtnTop:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(var(--brand-primary-rgb), 0.3);
+}
+
+.publishBtnTop:disabled {
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  gap: 1.5rem;
+  padding: 0 10px 10px 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Sidebar Styling */
+.sidebar {
+  width: 300px;
+  height: calc(100vh - 20px);
+  margin: 10px;
+  border-radius: 20px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 20;
+  box-shadow: var(--shadow-sm);
+}
+
+.sidebar.collapsed {
+  width: 72px;
+}
+
+.sidebarHeader {
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  height: auto;
+  min-height: 64px;
+  box-sizing: border-box;
+}
+
+.collapsed .sidebarHeader {
+  flex-direction: column-reverse;
+  justify-content: center;
+  padding: 1rem 0.5rem;
+  gap: 1rem;
+}
+
+.collapsedBadge {
+  margin: 0;
+  background: var(--brand-primary);
+  color: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.sidebarHeader h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.badge {
+  background: var(--brand-primary);
+  color: white;
+  padding: 0.2rem 0.6rem;
+  border-radius: 99px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.questionList {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.collapsed .questionList {
+  padding: 1rem 0.5rem;
+}
+
+.questionItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-surface);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.collapsed .questionItem {
+  padding: 0.4rem;
+  justify-content: center;
+}
+
+.questionItem:hover {
+  border-color: var(--brand-primary);
+  background: rgba(var(--brand-primary-rgb), 0.03);
+}
+
+.questionItem.dragging {
+  opacity: 0.5;
+  background: var(--bg-body);
+  border: 1px dashed var(--brand-primary);
+}
+
+.dragHandle {
+  color: var(--text-muted);
+  cursor: grab;
+  margin-right: 4px;
+}
+
+.dragHandle:active {
+  cursor: grabbing;
+}
+
+.questionItem.active {
+  border-color: var(--brand-primary);
+  background: rgba(var(--brand-primary-rgb), 0.08);
+  box-shadow: inset 3px 0 0 var(--brand-primary);
+}
+
+.questionIndex {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--bg-elevated);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.questionItem.active .questionIndex {
+  background: var(--brand-primary);
+  color: white;
+}
+
+.questionPreview {
+  flex: 1;
+  min-width: 0; /* allows truncation */
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.deleteQuestionBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  opacity: 0;
+}
+
+.questionItem:hover .deleteQuestionBtn {
+  opacity: 1;
+}
+
+.deleteQuestionBtn:hover {
+  background: rgba(var(--error-rgb, 239, 68, 68), 0.1);
+  color: var(--error-color);
+}
+
+.qText {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500;
+}
+
+.qType {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.addQuestionWrapper {
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.collapsed .addQuestionWrapper {
+  flex-direction: column;
+  padding: 1rem 0.5rem;
+  align-items: center;
+}
+
+.addQuestionBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--bg-body);
+  border: 1px dashed var(--border-color);
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.6rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex: 1;
+}
+
+.collapsed .addQuestionBtn {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  flex: none;
+}
+
+.addQuestionBtn:hover {
+  background: rgba(var(--brand-primary-rgb), 0.05);
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+  transform: translateY(-2px);
+}
+
+.importBtn {
+  border-style: solid;
+  background: rgba(var(--brand-primary-rgb), 0.05);
+  color: var(--brand-primary);
+  border-color: rgba(var(--brand-primary-rgb), 0.2);
+}
+
+.importBtn:hover {
+  background: rgba(var(--brand-primary-rgb), 0.1);
+}
+
+.sidebarStats {
+  padding: 0.75rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: var(--bg-body);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.publishAction {
+  padding: 1.5rem;
+  border-top: 1px solid var(--border-color);
+  background: var(--bg-surface);
+}
+
+.publishBtn {
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(
+    135deg,
+    var(--brand-primary-hover) 0%,
+    var(--brand-primary) 100%
+  );
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(var(--brand-primary-rgb), 0.3);
+}
+
+.publishBtn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(var(--brand-primary-rgb), 0.4);
+}
+
+.publishBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.draftBtn {
+  background: var(--bg-surface) !important;
+  color: var(--brand-primary) !important;
+  border: 1px dashed var(--brand-primary) !important;
+  box-shadow: none !important;
+}
+
+.draftBtn:hover:not(:disabled) {
+  background: rgba(var(--brand-primary-rgb), 0.1) !important;
+  transform: translateY(-2px);
+}
+
+.previewBtn {
+  background: rgba(16, 185, 129, 0.1) !important;
+  color: var(--success-color) !important;
+  border: 1px solid var(--success-color) !important;
+  box-shadow: none !important;
+}
+
+.previewBtn:hover:not(:disabled) {
+  background: rgba(16, 185, 129, 0.2) !important;
+  transform: translateY(-2px);
+}
+
+.quizTitleInput {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  width: 300px;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.quizTitleInput:focus {
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 3px rgba(var(--brand-primary-rgb), 0.15);
+}
+
+/* Main Content Area */
+.mainArea {
+  flex: 1;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+
+.emptyState {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem;
+}
+
+.emptyIcon {
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  opacity: 0.5;
+}
+
+.emptyState h2 {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.emptyState p {
+  color: var(--text-secondary);
+  max-width: 400px;
+  line-height: 1.5;
+  margin-bottom: 32px;
+}
+
+.datasetSelectorWrapper {
+  margin: 16px 0 32px 0;
+  width: 100%;
+  max-width: 400px;
+}
+
+.datasetSelect {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--bg-body);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 500;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.datasetSelect:focus {
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 3px rgba(var(--brand-primary-rgb), 0.15);
+}
+
+.warningText {
+  color: var(--brand-accent) !important;
+  font-size: 0.9rem;
+  margin-top: -16px !important;
+  font-weight: 600;
+}
+
+.primaryBtn {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 12px;
+  background: var(--brand-primary);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.primaryBtn:hover {
+  background: var(--brand-primary-hover);
+}
+
+/* Per-Question Dataset Selection */
+.perQuestionDatasetBar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 24px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.datasetSelectSmall {
+  padding: 6px 12px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-main);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.datasetSelectSmall:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(var(--brand-primary-rgb), 0.2);
+}
+
+/* Import Modal Styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.modalContent {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modalHeader {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modalHeader h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--text-primary);
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.closeBtn:hover {
+  color: var(--text-primary);
+}
+
+.modalBody {
+  padding: 24px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.formGroup {
+  margin-bottom: 24px;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.importQuestionList {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 16px;
+  background: var(--bg-body);
+}
+
+.importQuestionList h4 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  color: var(--text-secondary);
+}
+
+.importQuestionItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  background: var(--bg-surface);
+  transition: all 0.2s;
+}
+
+.importQuestionItem:hover {
+  border-color: var(--brand-primary);
+}
+
+.importQuestionItem input[type="checkbox"] {
+  margin-top: 4px;
+  accent-color: var(--brand-primary);
+}
+
+.importQInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.importQText {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.importQType {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.modalFooter {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.cancelBtn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background: transparent;
+  color: var(--text-primary);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cancelBtn:hover {
+  background: var(--bg-body);
+}

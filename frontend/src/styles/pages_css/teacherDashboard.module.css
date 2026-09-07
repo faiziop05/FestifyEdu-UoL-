@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.mainContent {
+  flex: 1; /* Takes up the remaining width */
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.pageWrapper {
+  padding: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .mainContent {
+    padding-bottom: 75px; /* Give room for the bottom tab bar */
+  }
+  .pageWrapper {
+    padding: 1rem;
+  }
+}

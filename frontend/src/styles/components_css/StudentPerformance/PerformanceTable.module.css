@@ -1,0 +1,128 @@
+
+.tableContainer {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table th {
+  padding: 16px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.table td {
+  padding: 16px;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: middle;
+}
+
+.table tbody tr.clickableRow {
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.table tbody tr.clickableRow:hover {
+  background-color: var(--bg-elevated);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+
+.actionCell {
+  text-align: right;
+  width: 50px;
+}
+
+.actionIcon {
+  color: var(--text-light-gray);
+  transition: all 0.2s ease;
+}
+
+.table tbody tr.clickableRow:hover .actionIcon {
+  color: var(--brand-primary);
+  transform: translateX(4px);
+}
+
+.boldRollNumber {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
+}
+
+.scoreBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  min-width: 60px;
+}
+
+.scoreHigh {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--success-color);
+}
+
+.scoreMedium {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--orangeAccent);
+}
+
+.scoreLow {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--error-color);
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+}
+
+.pageButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pageButton:hover:not(:disabled) {
+  background: var(--bg-elevated);
+  border-color: var(--text-light-gray);
+}
+
+.pageButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pageInfo {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
