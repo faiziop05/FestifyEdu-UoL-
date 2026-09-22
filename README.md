@@ -1,94 +1,49 @@
 # FestifyEdu
 
-Welcome to the **FestifyEdu** project! This is a comprehensive, interactive learning platform that allows teachers to create data-driven quizzes using datasets, host live sessions, and track student performance. The system features a robust role-based access control system with Super Admin, Admin, Teacher, and Student roles.
+An interactive, data-driven quiz platform for classrooms — teachers build quizzes from real datasets and host live, Kahoot-style sessions with real-time scoring.
 
-## 🌐 Live Demo
+## Overview
 
-You can view and interact with the live deployed website here:
-**[FestifyEdu Live Site](https://frontend-pink-rho-s0gl23uxb5.vercel.app/)**
+FestifyEdu is a full-stack learning platform (MERN + Socket.IO) that lets teachers turn datasets (uploaded or imported from Google Drive) into interactive quizzes, host live sessions students join with a 6-digit room code, and track performance in real time. It has a full role-based access model — Super Admin, Admin, Teacher, and Student — so a single deployment can serve multiple organizations/schools with isolated data and permissions.
 
----
+## Problem it solves
 
-## 🔑 Demo Credentials
+Generic quiz tools treat questions as static content disconnected from real data. FestifyEdu is built for data-literacy teaching: quizzes are generated from actual datasets (spreadsheets/Google Sheets), so students answer questions grounded in real numbers rather than pre-written trivia, while teachers get a multi-tenant admin structure (organizations → admins → teachers) instead of a single flat user list.
 
-You can use the following credentials to explore the different roles and access levels within the application:
+## Key features
 
-| Role            | Email                       | Password      | Access Level                                                                                  |
-| --------------- | --------------------------- | ------------- | --------------------------------------------------------------------------------------------- |
-| **Super Admin** | `superadmin@festifyedu.com` | `password123` | Highest level. Manage all organizations, global datasets, and system admins.                  |
-| **Admin**       | `faizan@lutonschools.com`   | `123456`      | Manage teachers and share quizzes/datasets within a specific organization (Luton Schools).    |
-| **Teacher**     | `ali@lutonschools.com`      | `123456`      | Create interactive quizzes, upload datasets, start live sessions, and monitor student grades. |
-| **Student**     | _(No Account Required)_     | _(N/A)_       | Students join active sessions using a 6-digit room code provided by a Teacher.                |
+- **Live, real-time quiz sessions** over Socket.IO: teachers start a session, students join via a 6-digit room code with no account required, and scores/state update live across all connected clients
+- **Dataset-driven quiz building**: datasets can be uploaded directly (`xlsx`) or imported from a teacher's Google Drive via the Google Drive API/OAuth integration (`backend/src/routes` + `googleapis`)
+- **Four-tier role-based access control**: Super Admin (manages organizations and global datasets), Admin (manages teachers and shares quizzes/datasets within an organization), Teacher (creates quizzes, runs live sessions, views grades), Student (join-only, no account)
+- **Automatic stale-session cleanup**: a cron job (`backend/src/cron/sessionCleanup.js`) ends and archives any session left "active" for more than 3 hours, notifying connected clients over the socket room
+- **Grade/performance tracking** with Chart.js dashboards on the frontend
+- **Test coverage on both sides**: Jest + Supertest + `mongodb-memory-server` on the backend (including dedicated Socket.IO load tests), Vitest + Testing Library on the frontend
 
----
+## What's unique about it
 
-## 📁 Folder Structure
+- Quizzes are generated from real datasets rather than static question banks — the core teaching use case is data literacy, not trivia.
+- A three-level organizational hierarchy (Super Admin → Admin/organization → Teacher) with row-level data isolation, built for multi-school deployment rather than a single-tenant classroom tool.
+- Includes purpose-built Socket.IO load tests (`backend/__tests__/load/`) to validate real-time session behavior under concurrent student connections.
 
-The repository is split into two main directories:
+## Tech stack
 
-```text
-fh190/
-│
-├── backend/               # Node.js + Express Backend Server
-│   ├── src/
-│   │   ├── config/        # Database and server configuration
-│   │   ├── controllers/   # Route handlers mapped by role (superAdmin, admin, teacher, global)
-│   │   ├── middlewares/   # Authentication and Role validation middleware
-│   │   ├── models/        # Mongoose database schemas (Users, Classrooms, Quizzes, Datasets, etc.)
-│   │   ├── routes/        # Express API routes
-│   │   └── cron/          # Background cron jobs (e.g., stale session cleanup)
-│   ├── index.js           # Server entry point
-│   ├── seed.js            # Database seeding script for initial setup
-│   └── package.json       # Backend dependencies and scripts
-│
-├── frontend/              # React (Vite) Frontend Application
-│   ├── src/
-│   │   ├── components/    # Reusable UI components (Header, Navigation, QuizBuilder, Modals)
-│   │   ├── pages/         # Page views organized by role (superadmin, admin, teacher, student, globel)
-│   │   ├── redux/         # Redux state management (Auth, API slices)
-│   │   ├── styles/        # CSS Modules for styling components and pages
-│   │   ├── hooks/         # Custom React hooks (e.g., useThemeObserver)
-│   │   └── App.jsx        # Main application routing and protected routes layout
-│   ├── index.html         # Frontend entry point
-│   └── package.json       # Frontend dependencies and scripts
-│
-└── README.md              # Project documentation
-```
+- **Frontend**: React 19 + Vite, Redux Toolkit + redux-persist, React Router v7, Chart.js/`react-chartjs-2`, `react-hook-form` + `zod` validation, Socket.IO client
+- **Backend**: Node.js + Express 5, Socket.IO, Mongoose (MongoDB), JWT + bcryptjs auth, Google Drive API (`googleapis`) integration, `xlsx` for spreadsheet parsing, `node-cron`-style scheduled cleanup
+- **Database**: MongoDB
+- **Testing**: Jest + Supertest + mongodb-memory-server (backend), Vitest + Testing Library (frontend)
 
-texttext---
+## Setup / running instructions
 
-## 🚀 Step-by-Step Installation Instructions
+Prerequisites: Node.js, a MongoDB database (local or Atlas), and (optionally) Google Cloud OAuth credentials for the Drive import feature.
 
-To run this project locally on your machine, follow these steps:
-
-### Prerequisites
-
-Make sure you have [Node.js](https://nodejs.org/) installed on your machine. You will also need access to a MongoDB database (either local or MongoDB Atlas).
-
-### 1. Clone the repository
-
-```bash
-git clone <your-repository-url>
-cd fh190
-```
-
-bashbash### 2. Set up the Backend
-
-Open a new terminal window and navigate to the backend folder:
+### Backend
 
 ```bash
 cd backend
-```
-
-bashbash**Install dependencies:**
-
-```bash
 npm install
 ```
 
-bashbash**Configure Environment Variables:**
-Create a `.env` file in the `backend/` directory with the following keys. Below are detailed instructions on how to obtain each value:
-
+Create `backend/.env`:
 ```env
 PORT=5001
 MONGO_URI=your_mongodb_connection_string
@@ -98,99 +53,42 @@ GOOGLE_CLIENT_SECRET=your_google_client_secret
 GOOGLE_REDIRECT_URI=http://localhost:5001/api/drive/callback
 ```
 
-env#### How to configure your `.env` file:
-
-**1. `PORT`:**
-The port your backend will run on. Default is `5001`.
-
-**2. `MONGO_URI` (MongoDB Connection):**
-
-- Go to [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) and create a free account.
-- Create a new Cluster and a Database User. Ensure you allow network access from anywhere (`0.0.0.0/0`) or your specific IP.
-- Click **Connect** -> **Drivers** and copy the connection string.
-- Replace `<password>` with your Database User's password.
-
-**3. `JWT_SECRET` (Authentication Token Security):**
-
-- This is used to sign JSON Web Tokens for user login sessions.
-- You can use any long, random string. To generate a secure one easily, you can run the following in your terminal: `node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"`
-- Paste the output as your `JWT_SECRET`.
-
-**4. Google Drive API Credentials (`GOOGLE_CLIENT_ID` & `GOOGLE_CLIENT_SECRET`):**
-FestifyEdu integrates with Google Drive so teachers can import datasets directly from their cloud storage. To make this work, you need Google Cloud API credentials:
-
-- Go to the [Google Cloud Console](https://console.cloud.google.com/).
-- Create a New Project (e.g., "FestifyEdu App").
-- Go to **APIs & Services** > **Library** and search for **Google Drive API**. Click **Enable**.
-- Go to **APIs & Services** > **OAuth consent screen**. Choose **External** and fill in the required fields (App name, support email, developer contact email). Save and continue.
-- Go to **APIs & Services** > **Credentials**.
-- Click **Create Credentials** > **OAuth client ID**.
-- Select **Web application** as the Application Type.
-- Under **Authorized redirect URIs**, click "Add URI" and paste your redirect URL exactly as it is in the `.env`: `http://localhost:5001/api/drive/callback` (If you deploy the app, you will need to add the deployed backend URL here too).
-- Click **Create**. You will be presented with your **Client ID** and **Client Secret**. Copy these into your `.env` file!
-
-**5. `GOOGLE_REDIRECT_URI`:**
-
-- Set this to `http://localhost:5001/api/drive/callback` for local development. Make sure it matches the Authorized Redirect URI you entered in the Google Cloud Console exactly.
-
-**Seed the Database (Optional but recommended):**
-If you are setting up the database for the very first time, you need an initial Super Admin account to log in and create other organizations and teachers. To automatically generate this default user and an initial organization, run the seed script:
-
+Optionally seed an initial Super Admin + organization:
 ```bash
 node seed.js
 ```
 
-bashRunning this script will create a new organization called "FestifyEdu Central" and provide you with the following login credentials:
-
-- **Email:** `superadmin@festifyedu.com`
-- **Password:** `password123`
-
-You can use these credentials to log in at `http://localhost:5173/auth/login` once the frontend is running.
-
-bash**Start the Backend Server:**
-
+Run the server:
 ```bash
-npm run dev
-# OR
+npm run dev     # nodemon
+# or
 npm start
 ```
 
-bashbash*The backend should now be running on `http://localhost:5001`.*
+Backend runs on `http://localhost:5001`.
 
-### 3. Set up the Frontend
-
-Open a second terminal window and navigate to the frontend folder from the root of the project:
+### Frontend
 
 ```bash
 cd frontend
-```
-
-bashbash**Install dependencies:**
-
-```bash
 npm install
 ```
 
-bashbash**Configure Environment Variables:**
-Create a `.env` file in the `frontend/` directory (if required by your setup) to define the backend API URL. By default, it will attempt to connect to localhost port 5001.
-
+Create `frontend/.env`:
 ```env
 VITE_API_URL=http://localhost:5001/api
 ```
 
-envenv**Start the Frontend Development Server:**
-
 ```bash
 npm run dev
 ```
 
-bashbash*The frontend should now be running on `http://localhost:5173`. Open this URL in your browser to view the application.*
+Frontend runs on `http://localhost:5173`.
 
----
+### Tests
 
-## 🛠️ Built With
-
-- **Frontend:** React, Vite, Redux Toolkit, React Router DOM, Chart.js, Lucide React
-- **Backend:** Node.js, Express.js, Socket.IO, Mongoose
-- **Database:** MongoDB
-- **Authentication:** JWT (JSON Web Tokens) & bcryptjs
+```bash
+cd backend && npm test          # Jest + coverage
+cd backend && npm run test:load # Socket.IO load tests
+cd frontend && npm test         # Vitest + coverage
+```
